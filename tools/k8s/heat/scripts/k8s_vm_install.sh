@@ -151,7 +151,10 @@ else
   exit
 fi
 
-
+if [[ ${UBUNTU_RELEASE} == 22.* ]]; then
+  echo "removing containerd"
+  apt-get remove containerd.io
+fi
 
 # tell apt to retry 3 times if failed
 mkdir -p /etc/apt/apt.conf.d
@@ -192,6 +195,7 @@ for PKG in kubeadm docker.io; do
     fi
   fi
 done
+
 apt-get -y autoremove
 
 # install docker
