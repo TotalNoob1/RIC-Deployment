@@ -23,17 +23,17 @@ ROOT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null && pwd )"
 IS_HELM3=$(helm version -c --short|grep -e "^v3")
 
 # Start Helm local repo if there isn't one
-HELM_REPO_PID=$(ps -x | grep  "helm serve" | grep -v "grep" | awk '{print $1}')
+# HELM_REPO_PID=$(ps -x | grep  "helm serve" | grep -v "grep" | awk '{print $1}')
 
-if [ -z "$HELM_REPO_PID" ]
-then
-    if [ -z $IS_HELM3 ]
-    then
-      nohup helm serve >& /dev/null &
-    else
-      nohup helm servecm --port=8879 --context-path=/charts  --storage local >& /dev/null &
-    fi
-fi
+# if [ -z "$HELM_REPO_PID" ]
+# then
+#     if [ -z $IS_HELM3 ]
+#     then
+#       nohup helm serve >& /dev/null &
+#     else
+#       nohup helm servecm --port=8879 --context-path=/charts  --storage local >& /dev/null &
+#     fi
+# fi
 
 # Check if servecm plugin is ready to serve request
 command='curl --silent --output /dev/null  http://127.0.0.1:8879/charts'
@@ -75,7 +75,6 @@ helm repo index $HELM_LOCAL_REPO
 
 # Make sure that helm local repo is added
 helm repo remove local
-helm repo add local http://127.0.0.1:8879/charts
-
+helm repo add local http://127.0.0.1:8879
 
 
