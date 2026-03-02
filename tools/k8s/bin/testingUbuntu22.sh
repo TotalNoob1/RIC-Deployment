@@ -204,10 +204,14 @@ cat > /etc/docker/daemon.json <<EOF
   "storage-driver": "overlay2"
 }
 EOF
+cat /etc/containerd/config.toml #NOTE: Remember to remove this. This is just me debuging
+containerd config default > /etc/containerd/config.toml
+
 mkdir -p /etc/systemd/system/docker.service.d
 systemctl enable docker.service
 systemctl daemon-reload
 systemctl restart docker
+systemctl restart containerd
 
 
 
