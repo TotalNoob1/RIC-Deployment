@@ -63,6 +63,7 @@ modprobe -- ip_vs
 modprobe -- ip_vs_rr
 modprobe -- ip_vs_wrr
 modprobe -- ip_vs_sh
+modprobe -- br_netfilter
 # modprobe -- nf_conntrack_ipv4 # out of date. Will uncomment once this is done
 # modprobe -- nf_conntrack_ipv6 # out of date.
 # modprobe -- nf_conntrack_proto_sctp # out of date.
