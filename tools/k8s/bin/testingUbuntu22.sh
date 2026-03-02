@@ -348,7 +348,7 @@ EOF
   tar -C /opt/cni/bin -xzf cni-plugins-linux-$ARCH-v1.7.1.tgz
   kubectl apply -f "https://raw.githubusercontent.com/flannel-io/flannel/refs/heads/master/Documentation/kube-flannel.yml"
 
-  wait_for_pods_running 7 kube-system
+  wait_for_pods_running 8 A
 
   # kubectl taint nodes --all node-role.kubernetes.io/master-#been replaced with control panel
   kubectl taint nodes --all node-role.kubernetes.io/control-plane- 
