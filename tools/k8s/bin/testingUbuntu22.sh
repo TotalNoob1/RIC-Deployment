@@ -337,6 +337,15 @@ EOF
 
   kubectl get pods --all-namespaces
 
+  ARCH=$(uname -m)
+  case $ARCH in
+    armv7*) ARCH="arm";;
+    aarch64) ARCH="arm64";;
+    x86_64) ARCH="amd64";;
+  esac
+  mkdir -p /opt/cni/bin
+  curl -O -L https://github.com/containernetworking/plugins/releases/download/v1.7.1/cni-plugins-linux-$ARCH-v1.7.1.tgz
+  tar -C /opt/cni/bin -xzf cni-plugins-linux-$ARCH-v1.7.1.tgz
   kubectl apply -f "https://raw.githubusercontent.com/flannel-io/flannel/refs/heads/master/Documentation/kube-flannel.yml"
 
   wait_for_pods_running 7 kube-system
