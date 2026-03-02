@@ -53,7 +53,7 @@ fi
 ROOT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null && pwd )"
 #Check for helm3
 IS_HELM3=$(helm version -c --short|grep -e "^v3")
-
+(cd /root/.cache/helm/repository/local && python3 -m http.server 8879) & 
 # if [ $IS_HELM3 ]
 # then
 #   # Check for servcm plugin

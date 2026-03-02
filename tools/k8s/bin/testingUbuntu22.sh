@@ -385,6 +385,10 @@ EOF
     sleep 15
   done
 
+  mkdir -p /root/.cache/helm/repository/local
+  mkdir -p /root/.cache/helm/repository/local/charts
+  (cd /root/.cache/helm/repository/local && helm repo index)
+
   echo "Preparing a master node (lowser ID) for using local FS for PV"
   PV_NODE_NAME=$(kubectl get nodes |grep control-plane | cut -f1 -d' ' | sort | head -1)
   kubectl label --overwrite nodes $PV_NODE_NAME local-storage=enable
